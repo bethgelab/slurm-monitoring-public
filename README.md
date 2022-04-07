@@ -18,10 +18,10 @@ Grafana: Dashboarding platform which is open source and pretty can do anything f
 1. Clone our repository into your environment:  
 ```
 cd /home/<user>
-git clone https://github.com/bethgelab/slurm-monitoring.git
+git clone https://github.com/bethgelab/slurm-monitoring-public.git
 ```
 2. Initialization of the environments:  
-- At source: Within the project repository `slurm-monitoring` contains an .env.template. Use this, to setup the required environmental variables. Create a new file called .env `touch .env` and fill up the values in accordance with `.env.template`.
+- At source: Within the project repository `slurm-monitoring-public` contains an .env.template. Use this, to setup the required environmental variables. Create a new file called .env `touch .env` and fill up the values in accordance with `.env.template`.
 ```
 #!/bin/bash
 eval $(ssh-agent)
