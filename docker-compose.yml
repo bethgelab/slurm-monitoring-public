@@ -1,0 +1,34 @@
+version: '3.6'
+volumes:
+  grafana_data:
+  influxdb2_data:
+  influxdb2_config:
+networks:
+  tig_app_net:
+
+services:
+  influxdb:
+    container_name: influxdb
+    image: influxdb:2.1.1
+    env_file: ./influx/.env
+    ports:
+      - '8085:8086'
+    volumes:
+      - 'influxdb2_data:/var/lib/influxdb2'
+      - 'influxdb2_config:/etc/influxdb2'
+    networks:
+      - tig_app_net
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana-oss:8.2.6
+    depends_on:
+      - influxdb
+    env_file: ./grafana/.env
+    ports:
+      - '3001:3000'
+    volumes:
+      - 'grafana_data:/var/lib/grafana'
+      - './grafana/grafana.ini:/etc/grafana/grafana.ini'
+    networks:
+      - tig_app_net
