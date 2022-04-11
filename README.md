@@ -52,7 +52,7 @@ DOCKER_INFLUXDB_INIT_MODE=setup
 DOCKER_INFLUXDB_INIT_USERNAME=influx
 DOCKER_INFLUXDB_INIT_PASSWORD=influx
 DOCKER_INFLUXDB_INIT_ORG=organization
-DOCKER_INFLUXDB_INIT_BUCKET=bucketname
+DOCKER_INFLUXDB_INIT_BUCKET=bucketname # If you are importing the grafana_dashboard.json file, then make sure to change all flux query to point to this bucketname
 # DOCKER_INFLUXDB_INIT_RETENTION
 # 32 alphanumeric character token. if not specific will be auto-generated.
 DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=admintoken
