@@ -132,3 +132,6 @@ To add new parsers and any logic to collect information of the slurm, you can ad
 ## Acknowledgements:  
 1. https://github.com/slaclab/slurm-telegraf.git
 2. Nicolas Chan. 2019. A Resource Utilization Analytics Platform Using Grafana and Telegraf for the Savio Supercluster. In Proceedings of the Practice and Experience in Advanced Research Computing on Rise of the Machines (learning) (PEARC '19). Association for Computing Machinery, New York, NY, USA, Article 31, 1–6. DOI:https://doi.org/10.1145/3332186.3333053
+
+## Our Grafana Dashboard:  
+[Grafana Dashboard](docs/slurm_dash1.png)
