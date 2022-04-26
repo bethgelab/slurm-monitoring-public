@@ -2,14 +2,15 @@
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
+
 ## TIG Stack:  
-TIG means telegraf, influx database, grafana. Each components act together in performing data collection from the HPC cluster, pushing the collected data by cleaning, check data quality and pushing it to influx database. For the visualization of the collected data in near-realtime grafana is utilized.
+TIG means telegraf, influx database, grafana. Each component works together to take data from the HPC cluster, clean it, check its quality, and push it to the influx database. Grafana is used for near real-time display of the data collected.
 
 Telegraf: As per the official documentation, telegraf is a server-based agent for collecting and sending all metrics and events from databases, systems, and IoT sensors. The telegraf written in go and offers numerous plugins. One of such plugins utilized in this project is the input.exec plugin to write the data out to influx db through a telegraf line protocol. More info of the ways the data can be sent can be looked up here: https://docs.influxdata.com/telegraf/v1.21/data_formats/input/influx/
 
-Influx Database: It is a time-series based database built to collect data coming in from various format and allows scaling the database on the increasing sizes of the data. It acts well with the telegraf.
+Influx Database: It's a time-series database designed to collect data in a variety of formats and scale the database to accommodate larger data sets. It works nicely in conjunction with the telegraf.
 
-Grafana: Dashboarding platform which is open source and pretty can do anything from querying, visualizing, alerting based on the data stored anywhere. The dashboard itself is flexible and can be shared. The advantage of using grafana is the fact the data becomes accessible to anyone within an organization. Thus allowing to build data-driven apps and methodologies.
+Grafana: Is an open source dashboarding platform that can handle everything from querying, displaying, and alerting depending on data stored anywhere. The dashboard itself is adaptable and shareable. The use of grafana has the advantage of making data available to everybody within an organization. As a result, data-driven apps and processes can be developed.
 
 ## Our Architecture:  
 <img src="docs/tig_arch.png">
@@ -31,7 +32,7 @@ export KEY=/your/absolute/location/id
 export SECRET_LOCATION=/your/absolute/location/.mysecret
 cat $SECRET_LOCATION | SSH_ASKPASS=/bin/cat setsid -w ssh-add $KEY
 ```  
-If the private key contains a secret even that must be specfied. Note: This is not tested again key not having a secret. As above, set all the required items.
+If the private key contains a secret even that must be specfied. Note: This config is not tested again key not having a secret. As above, set all the required items.
 
 - At scripts: Within the scripts folder, there is another `.env.template`, use that to setup the environments required for the parsing scripts. Create a new file within the scripts folder called `.env` and fill the values based on `.env.template` file.
 ```
@@ -44,7 +45,7 @@ export HEAD=<HEAD_IP or hostname>
 ```
 As above, specify the username for the head-node, which account the user belongs and has permission, PATHS, QBPATHS where it is located, and the HEAD_IP.
 
-- At influx: Within the influx directory, there is a .env fill. It is required to fill important information within it.
+- At influx: Within the influx directory, there is an .env fill. It is required to fill important information within it.
 ```
 # InfluxDB options
 # Can be setup/upgrade
@@ -59,7 +60,7 @@ DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=admintoken
 ```
 The mode should be setup, username, password should be setup individually, influx requires mandatory organization, bucket is the place where all the measurements will be written to and admin token is either auto-generated if not specified or a 32 character token can be generated.
 
-- At grafana: There is .env within the grafana folder use that to setup the username and password for the application.
+- At grafana: There is an .env within the grafana folder use that to setup the username and password for the application.
 ```
 # Grafana options
 GF_SECURITY_ADMIN_USER=grafana
@@ -68,10 +69,13 @@ GF_INSTALL_PLUGINS=
 ```
 3. Starting influx, and grafana docker containers:  
 ```
+# If make is not installed, install it using sudo apt install make which is also mentioned below during the installation and setup for telegraf.
+
 make up-influx # Will start the docker container for influx using the above envs
 make up-grafana # Will start the docker container for grafana using the above envs
+
 ```
-This will start the influx and grafana applications. Please look into the `docker-compose.yml` for the ports being exposed for each of these services.
+This will start the influx and grafana applications as docker containers. Please look into the `docker-compose.yml` for the ports being exposed for each of these services.
 
 To verify if they are working, open the below urls:  
 ```
@@ -85,7 +89,7 @@ http://<VMIP>:3001 -> This will open the grafana interface. Use the username and
   a. Installation of telegraf should done first. Use this documentation and perform the required operations https://docs.influxdata.com/telegraf/v1.21/introduction/installation/  
   b. Once, (a) is done, telegraf can be functional to perform collection of various metrics.  
   c. Install make with `sudo apt install make`  
-  d. Once, the repository is cloned, initial environment are set as per step(2), step(3), and step(4) are completed go to `telegraf/telegraf.conf` and change the influx configured information as shown below to your details comments details the information to be filled. Fill all the information and save telegraf.conf file:  
+  d. Once, the repository is cloned, initial environment are set as per step(2), and steps(3,4) are completed go to `telegraf/telegraf.conf` and change the influx configured information as shown below to your details comments details the information to be filled. Fill all the information and save telegraf.conf file:  
   ```
   [[outputs.influxdb_v2]]
    # The URLs of the InfluxDB cluster nodes.
